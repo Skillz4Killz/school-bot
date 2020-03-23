@@ -4,7 +4,7 @@ import { bot_cache } from "../../mod.ts"
 import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/master/utils/cache.ts"
 
 const ping_command = (message: Message) => {
-  return message.channel().send_message("testing ping")
+  return message.channel().send_message(`Ping MS: ${Date.now() - message.timestamp()}ms`)
 }
 
 const dev_ping_command = (message: Message) => {
@@ -15,7 +15,11 @@ bot_cache.commands.set(`ping`, {
   callback: ping_command
 })
 
-bot_cache.commands.set(`dev_ping`, {
+bot_cache.commands.set(`devping`, {
   guild_only: true,
   callback: dev_ping_command
 })
+
+// Add multiple aliases
+const devping_aliases = ['dping', 'ding']
+devping_aliases.map(alias => bot_cache.command_aliases.set(alias, 'devping'))
