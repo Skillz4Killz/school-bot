@@ -1,6 +1,6 @@
 import { Message } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/master/structures/message.ts"
 import { logGreen, logRed } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/master/utils/logger.ts"
-import { configs } from "../../configs.ts"
+import config from "../../config.ts"
 import { bot_cache } from "../../mod.ts"
 import { cache } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/master/utils/cache.ts"
 export const command_handler = async (message: Message) => {
@@ -43,8 +43,8 @@ export const command_handler = async (message: Message) => {
 }
 
 export const check_prefix = (message: Message, guild_id: string | undefined) => {
-  const prefix = guild_id ? bot_cache.guild_prefixes.get(guild_id) : configs.prefix
-  return prefix || configs.prefix
+  const prefix = guild_id ? bot_cache.guild_prefixes.get(guild_id) : config.prefix
+  return prefix || config.prefix
 }
 
 export const check_command = (command_name: string) => {

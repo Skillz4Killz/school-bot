@@ -1,0 +1,20 @@
+{
+  "name": "school-bot",
+  "version": "1.0.0",
+  "description": "school-bot in discordeno.ts",
+  "main": "mod.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "deno --allow-net --allow-read mod.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Skillz4Killz/school-bot.git"
+  },
+  "author": "Skillz4Killz-VenNeptury",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Skillz4Killz/school-bot/issues"
+  },
+  "homepage": "https://github.com/Skillz4Killz/school-bot#readme"
+}

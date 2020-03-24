@@ -1,5 +1,5 @@
 import Client from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/master/module/client.ts"
-import { configs } from "./configs.ts"
+import config from "./config.ts"
 import { Intents } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/master/types/options.ts"
 import { event_handlers } from "./src/events/event_handlers.ts"
 import { Message } from "https://raw.githubusercontent.com/Skillz4Killz/Discordeno/master/structures/message.ts"
@@ -14,25 +14,27 @@ export const bot_cache = {
 }
 
 const import_directory = async (path: string) => {
-  const files = Deno.readDirSync(Deno.realpathSync(path))
+  const files = Deno.readdirSync(Deno.realpathSync(path))
 
-  await Promise.all(files.map(async file => {
-    if (!file.name) return
+  await Promise.all(
+    files.map(async file => {
+      if (!file.name) return
 
-    const currentPath = `${path}/${file.name}`
-    if (file.isDirectory()) return import_directory(currentPath)
+      const currentPath = `${path}/${file.name}`
+      if (file.isDirectory()) return import_directory(currentPath)
 
-    await import(currentPath)
-  }))
+      await import(currentPath)
+    })
+  )
 }
 
 // Forces deno to read all the files which will fill the commands/inhibitors cache etc.
-await Promise.all(['./src/commands', './src/inhibitors'].map(path => import_directory(path)))
+await Promise.all(["./src/commands", "./src/inhibitors"].map(path => import_directory(path)))
 
 export const Bot = new Client({
-  token: configs.token,
+  token: config.token,
   // Replace this with your bot's ID.
-  bot_id: "675412054529540107",
+  bot_id: config.botId,
   // Pick the intents you wish to have for your bot.
   intents: [Intents.GUILDS, Intents.GUILD_MESSAGES],
   // These are all your event handler functions. Currently, being imported from a file called event_handlers from the events folder
